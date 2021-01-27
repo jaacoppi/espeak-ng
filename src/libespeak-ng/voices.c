@@ -92,6 +92,7 @@ enum {
 	V_BREATHW,
 
 	// these override defaults set by the translator
+	V_MAXDIGITS,
 	V_WORDGAP,
 	V_INTONATION,
 	V_TUNES,
@@ -137,6 +138,7 @@ static MNEM_TAB keyword_tab[] = {
 	{ "phonemes",     V_PHONEMES },
 	{ "translator",   V_TRANSLATOR },
 	{ "dictionary",   V_DICTIONARY },
+	{ "maxDigits",    V_MAXDIGITS },
 	{ "stressLength", V_STRESSLENGTH },
 	{ "spellingStress",    V_SPELLINGSTRESS },
 	{ "stressAmp",    V_STRESSAMP },
@@ -763,6 +765,13 @@ voice_t *LoadVoice(const char *vname, int control)
 			}
 			PhonemeReplacement(p);
 			break;
+		case V_MAXDIGITS: {
+			if (langopts)
+				sscanf(p, "%d", &langopts->max_digits);
+			else
+				fprintf(stderr, "Cannot set maxDigits: language not set, or is invalid.\n");
+			break;
+		}
 		case V_WORDGAP: // words
 			if (langopts)
 				sscanf(p, "%d %d", &langopts->word_gap, &langopts->vowel_pause);

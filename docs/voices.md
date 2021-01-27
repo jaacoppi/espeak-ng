@@ -1,4 +1,4 @@
-# Voice and Language Files
+w# Voice and Language Files
 
 - [Identification Attributes](#identification-attributes)
   - [name](#name)
@@ -24,6 +24,7 @@
   - [phonemes](#phonemes)
   - [dictionary](#dictionary)
   - [dictrules](#dictrules)
+  - [maxDigits](#maxdigits)
   - [replace](#replace)
   - [spellingStress](#spellingstress)
   - [stressRule](#stressrule)
@@ -367,6 +368,12 @@ voice. Rule numbers are in the range 0 to 31 and are specific to a
 language dictionary. They apply to rules in the language's `*_rules`
 dictionary file and also its `*_list` exceptions list. See
 [Text to Phoneme Translation](dictionary.md#conditional-rules).
+
+### maxdigits
+
+	maxDigits <number>
+
+If a number has more than <number> of digits, speak each digit individually. Defaults to 14.
 
 ### replace
 

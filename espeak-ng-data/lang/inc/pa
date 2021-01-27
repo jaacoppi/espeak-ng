@@ -1,2 +1,4 @@
 name Punjabi
 language pa
+
+maxDigits 22

@@ -2,3 +2,5 @@ name Gujarati
 language gu
 
 status testing
+
+maxDigits 22
