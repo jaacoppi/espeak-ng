@@ -1,0 +1,9 @@
+# This file is used for testing voice language options.
+# See docs/voices.md 
+name English (Testing)
+language en
+maintainer Juho Hiltunen <jaacoppi@kapsi.fi>
+status testing
+
+maxDigits 5	// Read numbers as individual digits if the number has more than <maxDigits> digits
+spellingStress  // If set: When spelling, set primary stress on first letter

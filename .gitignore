@@ -113,8 +113,11 @@ tests/*.check
 !tests/bom.test
 !tests/klatt.test
 !tests/mbrola.test
+!tests/voices.test
 !tests/dictionary.test
 !tests/cmd_options.test
+tests/voices/*
+!tests/voices/lang/gmw/en
 
 espeak-ng.pc
 

@@ -1,0 +1,32 @@
+#!/bin/sh
+ESPEAK_DATA_PATH=`pwd`/tests/voices
+
+test_voice() {
+	TEST_LANG=$1
+	MESSAGE=$2
+	EXPECTED=$3
+	TEST_TEXT=$4
+	TEST_BROKEN=${5:-false}
+
+	if [ "x$MESSAGE" = x- ] ; then
+		echo "testing ${TEST_LANG}"
+	else
+		echo "testing ${TEST_LANG} ($MESSAGE)"
+	fi
+	LD_LIBRARY_PATH=src:${LD_LIBRARY_PATH} \
+		src/espeak-ng --path=$ESPEAK_DATA_PATH ${OPTIONS} -xq -v ${TEST_LANG} "${TEST_TEXT}" > actual.txt
+	echo "${EXPECTED}" > expected.txt
+	if [ x$TEST_BROKEN = xbroken ] ; then
+		diff expected.txt actual.txt || (echo "... ignoring error (broken)" && true)
+	else
+		diff expected.txt actual.txt || exit 1
+	fi
+}
+
+##### Setup the test environment - use a specific language file in tests/voice/lang/gmw/en
+cp espeak-ng-data/{en_dict,intonations,phondata,phonindex,phontab} $ESPEAK_DATA_PATH
+
+##### Test language file options
+test_voice en "spellingStress"  "'eI,eI,eI 'eIb,i:s,i:" "aaa abc"
+test_voice en "maxDigits pass" "tw'Elv T'aUz@nd_! Tr'i:h'VndrI2d@n f'o@ti f'aIv" "12345"
+test_voice en "maxDigits exceed" "w'0n t'u:Tr'i:_!f'o@ f'aIvs'Iks_!s'Ev@n" "1234567"

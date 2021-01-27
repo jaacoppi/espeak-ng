@@ -63,7 +63,7 @@ install-exec-hook:
 clean-local:
 	cd src && rm -f *.o *~ && cd ..
 	cd src/libespeak-ng/ && rm -f *.o *.lo && cd ../..
-	cd tests && rm -f *.o *.lo && cd ..
+	cd tests && rm -f *.o *.lo && rm -f voices/{en_dict,intonations,phondata,phonindex,phontab} && cd ..
 if HAVE_GRADLE
 	cd android && $(GRADLE) clean
 endif
@@ -263,6 +263,7 @@ check:	tests/encoding.check \
 	tests/ssml-fuzzer.check \
 	tests/api.check \
 	tests/dictionary.check \
+	tests/voices.check \
 	tests/language-phonemes.check \
 	tests/language-replace.check \
 	tests/language-pronunciation.check \
