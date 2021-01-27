@@ -96,6 +96,7 @@ enum {
 	V_INTONATION,
 	V_TUNES,
 	V_STRESSLENGTH,
+	V_SPELLINGSTRESS,
 	V_STRESSAMP,
 	V_STRESSADD,
 	V_DICTRULES,
@@ -137,6 +138,7 @@ static MNEM_TAB keyword_tab[] = {
 	{ "translator",   V_TRANSLATOR },
 	{ "dictionary",   V_DICTIONARY },
 	{ "stressLength", V_STRESSLENGTH },
+	{ "spellingStress",    V_SPELLINGSTRESS },
 	{ "stressAmp",    V_STRESSAMP },
 	{ "stressAdd",    V_STRESSADD },
 	{ "intonation",   V_INTONATION },
@@ -686,6 +688,10 @@ voice_t *LoadVoice(const char *vname, int control)
 				voice->formant_factor = (int)((1+factor/4) * 256); // nominal formant shift for a different voice pitch
 			}
 			break;
+		case V_SPELLINGSTRESS: { // spellingStress
+			langopts->spelling_stress = true;		
+			break;
+		}
 		case V_STRESSLENGTH: // stressLength
 			stress_lengths_set = Read8Numbers(p, stress_lengths);
 			break;

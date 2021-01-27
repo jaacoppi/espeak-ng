@@ -25,6 +25,7 @@
   - [dictionary](#dictionary)
   - [dictrules](#dictrules)
   - [replace](#replace)
+  - [spellingStress](#spellingstress)
   - [stressRule](#stressrule)
   - [stressLength](#stresslength)
   - [stressAdd](#stressadd)
@@ -387,6 +388,10 @@ e.g.
 
 The phoneme mnemonics can be defined for each language, but some are
 listed in [Phonemes](phonemes.md).
+
+### spellingStress
+
+Takes no parameters. If set, stress is on first letter when spelling.
 
 ### stressRule
 
