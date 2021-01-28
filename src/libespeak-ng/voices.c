@@ -475,6 +475,27 @@ static void PhonemeReplacement(char *p)
 	replace_phonemes[n_replace_phonemes++].type = flags;
 }
 
+// Parse & Read functions handle error handling for reading attribute values
+static int Parse1Number(int *data, char *data_in, char *attribute) {
+		if (sscanf(data_in, "%d", data) != 1) {
+			fprintf(stderr, "%s: Invalid value in voice file.\n", attribute);
+			return 1;
+		}
+		return 0;
+}
+
+static int Parse1NumberLangopt(int *data, char *data_in, char *attribute, LANGUAGE_OPTIONS *langopts) {
+	if (langopts) {
+		if (Parse1Number(data, data_in, attribute) != 0) {
+			return 1;
+		}
+	} else {
+		fprintf(stderr, "Cannot set %s: language not set, or is invalid. Set \"language <xx>\" in the voice file.\n", attribute);
+		return 1;
+	}
+	return 0;
+}
+
 static int Read8Numbers(char *data_in, int *data)
 {
 	// Read 8 integer numbers
@@ -705,6 +726,7 @@ voice_t *LoadVoice(const char *vname, int control)
 			stress_add_set = Read8Numbers(p, stress_add);
 			break;
 		case V_INTONATION: // intonation
+//	break;
 			sscanf(p, "%d", &option_tone_flags);
 			if ((option_tone_flags & 0xff) != 0) {
 				if (langopts)
@@ -767,10 +789,9 @@ voice_t *LoadVoice(const char *vname, int control)
 			PhonemeReplacement(p);
 			break;
 		case V_MAXDIGITS: {
-			if (langopts)
-				sscanf(p, "%d", &langopts->max_digits);
-			else
-				fprintf(stderr, "Cannot set maxDigits: language not set, or is invalid.\n");
+			if (Parse1NumberLangopt(&value, p, buf, langopts) == 0) {
+				langopts->max_digits = value;
+			}
 			break;
 		}
 		case V_WORDGAP: // words
