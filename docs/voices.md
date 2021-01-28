@@ -32,7 +32,7 @@ w# Voice and Language Files
   - [stressAdd](#stressadd)
   - [stressAmp](#stressamp)
   - [intonation](#intonation)
-  - [dictmin](#dictmin)
+  - [dict_min](#dict_min)
 
 ----------
 
@@ -459,9 +459,9 @@ these defaults may be different for particular languages.
 * 3 -- Less intonation, and comma does not raise the pitch.  
 * 4 -- Pitch rises (rather than falls) at the end of sentence.
 
-### dictmin
+### dict_min
 
-	dictmin <value>
+	dict_min <value>
 
 Used for some languages to detect if additional language data is
 installed. If the size of the compiled dictionary data for the language
